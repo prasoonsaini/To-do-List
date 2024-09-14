@@ -1,0 +1,110 @@
+.main{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+.columns{
+    background-color: lightblue;
+    margin: 1px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    /* flex: 1 1 200px; */
+    /* min-height: 300px; */
+}
+.task{
+    border-radius: 10px;
+    min-height: 100px;
+    /* margin: 10px; */
+    background-color: #f5efef;
+    padding: 5px;
+    margin-bottom: 10px;
+    cursor: grab;
+    max-width: 100%; 
+    word-wrap: break-word;
+    margin: 4px;
+    border: 1px solid #afaaaa;
+    padding: 20px;
+}
+.task-content{
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+    flex-direction: column;
+}
+
+.task-content div{
+   margin: 6px;
+}
+
+.heading{
+    display: flex;
+    /* justify-content: center; */
+    padding: 10px;
+}
+.addButton{
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(78, 65, 65);
+    color: white;
+    padding: 5px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    margin: 4px;
+}
+
+.create-btn{
+    background-color: rgb(62, 130, 62);
+    padding: 5px;
+    color: white;
+    margin: 4px;
+    width: 6rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.create-btn-unclickable{
+    background-color: rgb(62, 130, 62);
+    padding: 5px;
+    color: white;
+    margin: 4px;
+    width: 6rem;
+    border-radius: 20px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.delete-btn{
+    background-color: rgb(215, 54, 54);
+    padding: 5px;
+    color: white;
+    margin: 4px;
+    width: 6rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.bnt-parent{
+    display: flex;
+    justify-content: center;
+}
+
+.task-content input{
+    margin: 4px;
+    border-radius: 6px;
+    height: 2rem;
+}
+
+.task-content textarea{
+    margin: 4px;
+    border-radius: 6px;
+}
+
+.priority{
+    width: 4rem;
+    border-radius: 10px;
+    background-color: rgb(224, 164, 54);
+    color: white;
+    border: none;
+}
