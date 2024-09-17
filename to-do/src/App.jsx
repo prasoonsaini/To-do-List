@@ -2,41 +2,39 @@ import { useState } from 'react'
 import './style.css';
 import AddTask from './AddTask';
 
-// const task = {
-//   id: 1,
-//   heading: "Go to gym",
-//   description: "go to gym tomorrow",
-//   priority: "high",
-//   state: "todo"
-// }
 function App() {
   const [todo,setTodo] = useState([]);
   const [draggedTodo,setDraggedTodo] = useState('');
   const [addingTask,setAddingTask] = useState(false);
   function handleDragStart(e,task) {
-    console.log("task being dragged",task)
     setDraggedTodo(task);
   }
   
   const handleDragOver = (e) => {
     e.preventDefault();
   };
+  
+  async function getTodos(){
+    const response = await axios.get("https://to-do-list-nu-sooty-99.vercel.app/")
+    setTodo(response.data.todos)
+  }
 
-  const handleDrop = (state) => {
+  window.onload = function() {
+    getTodos();
+};
+  async function handleDrop (state){
     const task = draggedTodo;
     task.state=state;
-    console.log("state",state)
-    const x = todo.filter((e)=>{
-        return e.id != task.id;
-      })
-      setTodo([...x,task])
+    const res = await axios.put("https://to-do-list-nu-sooty-99.vercel.app/",task)
+      setTodo(res.data.todos)
+      localStorage.setItem('todo', JSON.stringify(todo));
+      const storedPeople = JSON.parse(localStorage.getItem('todo'));
   }
 
   const addTodo = () => {
     setAddingTask(true);
   }
   const getPriorityColor=(priority)=>{
-    console.log("priority",priority)
     switch (priority) {
       case 'High':
           return 'rgb(255 55 95)';
@@ -61,7 +59,7 @@ function App() {
                   handleDragStart(e,task);
                 }}>
                 <div class="task-content">
-                    <h3>{task.heading}</h3>
+                    {task.heading}
                     <div>
                         {task.description}
                     </div>
