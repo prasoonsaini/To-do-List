@@ -6,12 +6,13 @@ function AddTask ({todo,setTodo,setAddingTask}) {
     const [state,setState] = useState("High")
     const [heading,setHeading] = useState(false);
     const [des,setDes] = useState(false);
+
     async function handleCreate (){
        const heading = document.querySelector("input").value;
        const description = document.querySelector("textarea").value;
        const st = state;
        /// it works without backend too
-       const response = await axios.post("https://to-do-list-nu-sooty-99.vercel.app/",{
+       const response = await axios.post("http://localhost:3003",{
         heading: heading,
         description: description,
         priority: st,

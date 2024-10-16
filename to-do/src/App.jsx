@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './style.css';
 import AddTask from './AddTask';
 
@@ -6,6 +6,18 @@ function App() {
   const [todo,setTodo] = useState([]);
   const [draggedTodo,setDraggedTodo] = useState('');
   const [addingTask,setAddingTask] = useState(false);
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await axios.get('http://localhost:3003');  // Replace with your backend URL
+        setTodo(response.data.todos);  // Set the todos data to state
+      } catch (err) {
+        console.log("error",err)
+      }
+    };
+   
+    fetchTodos();
+  }, [todo]); 
   function handleDragStart(e,task) {
     setDraggedTodo(task);
   }
@@ -15,7 +27,7 @@ function App() {
   };
   
   async function getTodos(){
-    const response = await axios.get("https://to-do-list-nu-sooty-99.vercel.app/")
+    const response = await axios.get("http://localhost:3003")
     setTodo(response.data.todos)
   }
 
@@ -25,7 +37,7 @@ function App() {
   async function handleDrop (state){
     const task = draggedTodo;
     task.state=state;
-    const res = await axios.put("https://to-do-list-nu-sooty-99.vercel.app/",task)
+    const res = await axios.put("http://localhost:3003/",task)
       setTodo(res.data.todos)
       localStorage.setItem('todo', JSON.stringify(todo));
       const storedPeople = JSON.parse(localStorage.getItem('todo'));
@@ -61,7 +73,6 @@ function App() {
                 <div class="task-content">
                     {task.heading}
                     <div>
-                        {task.description}
                     </div>
                     <button class="priority" style={{background: getPriorityColor(task.priority)}}>{task.priority}</button>
                 </div>
